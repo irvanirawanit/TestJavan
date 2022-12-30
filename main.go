@@ -4,12 +4,16 @@ import (
 	"net/http"
 	"os"
 
+	"TestJavan/config"
 	"TestJavan/handler"
-
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	godotenv.Load()
+	config.InitDB()
+
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "TestJavan")
