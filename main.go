@@ -2,8 +2,10 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"TestJavan/handler"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -34,5 +36,10 @@ func main() {
 	e.PUT("/family_assets/:id", handler.FamilyAssetsUpdate)
 	e.DELETE("/family_assets/:id", handler.FamilyAssetsDelete)
 
-	e.Logger.Fatal(e.Start(":1323"))
+	// Start server
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9000" // Default port if not specified
+	}
+	e.Logger.Fatal(e.Start(":" + port))
 }
